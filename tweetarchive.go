@@ -5,16 +5,15 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"text/template"
 	"time"
 
 	_ "github.com/bmizerany/pq"
 )
 
 type Tweet struct {
-	ID        int64
-	Text      string
-	Timestamp time.Time
+	ID        int64     `json:"id"`
+	Text      string    `json:"text"`
+	Timestamp time.Time `json:"timestamp"`
 }
 
 const ftsSql = `
@@ -57,17 +56,11 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	b, err := json.Marshal(struct {
 		Tweets []*Tweet `json:"tweets"`
 	}{tweets})
+	if err != nil {
+		log.Println("couldn't marshal JSON search results", err)
+	}
 	w.Write(b)
-	//context := map[string]interface{}{
-	//	"Tweets": tweets,
-	//	"Query": q,
-	//}
-	//if err = searchResultsTemplate.Execute(w, context); err != nil {
-	//	http.Error(w, err.Error(), http.StatusInternalServerError)
-	//}
 }
-
-var searchResultsTemplate = template.Must(template.ParseFiles("searchresults.html"))
 
 func init() {
 	var err error
