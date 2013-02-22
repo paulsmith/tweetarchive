@@ -1,31 +1,23 @@
 'use strict';
 
-/* jasmine specs for controllers go here */
+describe("Tweet archive search controllers", function() {
+	describe("TweetListCtrl", function() {
+		var scope, ctrl, $httpBackend;
 
-describe('MyCtrl1', function(){
-  var myCtrl1;
+		beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+			$httpBackend = _$httpBackend_;
+			$httpBackend.expectGET("/search?q=mapnik").
+				respond({tweets: [{text: "First"}, {text: "Hello, world"}]})
+			scope = $rootScope.$new();
+			ctrl = $controller(TweetListCtrl, {$scope: scope});
+		}));
 
-  beforeEach(function(){
-    myCtrl1 = new MyCtrl1();
-  });
-
-
-  it('should ....', function() {
-    //spec body
-  });
-});
-
-
-describe('MyCtrl2', function(){
-  var myCtrl2;
-
-
-  beforeEach(function(){
-    myCtrl2 = new MyCtrl2();
-  });
-
-
-  it('should ....', function() {
-    //spec body
-  });
+		it("should create tweets model w/ 2 tweets fetched from xhr", function() {
+			expect(scope.tweets).toBeUndefined();
+			$httpBackend.flush();
+			expect(scope.tweets).toEqual([
+				{text: "First"}, {text: "Hello, world"}
+			]);
+		})
+	});
 });

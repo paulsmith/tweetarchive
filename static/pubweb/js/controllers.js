@@ -2,11 +2,10 @@
 
 /* Controllers */
 
-
-function MyCtrl1() {}
-MyCtrl1.$inject = [];
-
-
-function MyCtrl2() {
+function TweetListCtrl($scope, $http) {
+	$http.get("/search?q=mapnik").success(function(data) {
+		$scope.tweets = data.tweets;
+	});
 }
-MyCtrl2.$inject = [];
+
+//TweetListCtrl.$inject = ['$scope', '$http'];

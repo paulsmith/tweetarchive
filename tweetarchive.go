@@ -17,7 +17,7 @@ type Tweet struct {
 }
 
 const ftsSql = `
-select id, ts_headline('english', text, q, 'HighlightAll=TRUE'), created_at
+select id, text, ts_headline('english', text, q, 'HighlightAll=TRUE'), created_at
 from tweets, plainto_tsquery('english', $1) q
 where tsv @@ q order by ts_rank_cd(tsv, q) desc;
 `
@@ -31,7 +31,8 @@ func Search(query string) (tweets []*Tweet, e error) {
 	}
 	for rows.Next() {
 		tweet := &Tweet{}
-		err = rows.Scan(&tweet.ID, &tweet.Text, &tweet.Timestamp)
+		var headline string
+		err = rows.Scan(&tweet.ID, &tweet.Text, &headline, &tweet.Timestamp)
 		if err != nil {
 			return nil, err
 		}
