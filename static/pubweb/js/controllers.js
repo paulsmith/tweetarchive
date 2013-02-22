@@ -3,9 +3,13 @@
 /* Controllers */
 
 function TweetListCtrl($scope, $http) {
-	$http.get("/search?q=mapnik").success(function(data) {
-		$scope.tweets = data.tweets;
-	});
+	$scope.query = "";
+
+	$scope.search = function() {
+		$http.get("/search?q=" + $scope.query).success(function(data) {
+			$scope.tweets = data.tweets;
+		});
+	}
 }
 
 //TweetListCtrl.$inject = ['$scope', '$http'];

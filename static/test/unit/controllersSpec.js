@@ -14,6 +14,8 @@ describe("Tweet archive search controllers", function() {
 
 		it("should create tweets model w/ 2 tweets fetched from xhr", function() {
 			expect(scope.tweets).toBeUndefined();
+			scope.query = "mapnik";
+			scope.search();
 			$httpBackend.flush();
 			expect(scope.tweets).toEqual([
 				{text: "First"}, {text: "Hello, world"}

@@ -9,7 +9,9 @@
 </head>
 <body ng-controller="TweetListCtrl">
 	<h1>Twitter archive search</h1>
-	<input type="search" ng-model="query">
+	<form ng-submit="search()">
+		<input type="search" ng-model="query">
+	</form>
 	<hr>
 	<h2>Results</h2>
 	<ul>
