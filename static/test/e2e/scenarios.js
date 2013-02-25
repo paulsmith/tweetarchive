@@ -2,12 +2,15 @@
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 
-describe('my app', function() {
+describe('twitter archive search', function() {
 
   beforeEach(function() {
-    browser().navigateTo('../../pubweb/index.html');
+    browser().navigateTo('/');
   });
 
+  it('should search for query string', function() {
+	input('query').enter('mapnik');
+  });
 
   /*
   it('should automatically redirect to /view1 when location hash/fragment is empty', function() {

@@ -1,23 +1,30 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="tweetArchive">
 <head>
   <meta charset="utf-8">
   <title>Twitter archive search</title>
   <link rel="stylesheet" href="css/app.css"/>
   <script src="lib/angular/angular.js"></script>
+  <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
 </head>
 <body ng-controller="TweetListCtrl">
 	<h1>Twitter archive search</h1>
 	<form ng-submit="search()">
-		<input type="search" ng-model="query">
+		<input type="search" ng-model="query" autofocus>
 	</form>
-	<hr>
-	<h2>Results</h2>
-	<ul>
-		<li ng-repeat="tweet in tweets">
-			{{tweet.text}}
-		</li>
-	</ul>
+	<div ng-show="error">Error: {{error}}</div>
+	<div ng-show="lastQuery">
+			<hr>
+			<h2>Searched for {{lastQuery | lowercase}}</h2>
+			<p>{{tweets.length}} <span ng-pluralize count="tweets.length" when="{one: 'result', other: 'results'}"></span>.</p>
+			<ul>
+				<li ng-repeat="tweet in tweets">
+					{{tweet.text}}
+					<a ng-href="https://twitter.com/paulsmith/status/{{tweet.id}}">view tweet</a>
+					{{tweet.timestamp | date:shortDate }}
+				</li>
+			</ul>
+	</div>
 </body>
 </html>
