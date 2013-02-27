@@ -6,11 +6,14 @@ import (
 	"database/sql"
 	"encoding/json"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"path/filepath"
 	"strconv"
 	"time"
+
+	"bitbucket.org/tebeka/nrsc"
 
 	_ "github.com/bmizerany/pq"
 )
@@ -237,6 +240,8 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+var indexHtml []byte
+
 func init() {
 	var err error
 	db, err = newDb(map[string]interface{}{"db": "dbname=paul port=5433 sslmode=disable"})
@@ -249,12 +254,25 @@ func init() {
 			panic(err)
 		}
 	}
+
+	nrsc.Initialize()
+	rdr, err := nrsc.Get("index.html").Open()
+	if err != nil {
+		panic(err)
+	}
+	indexHtml, err = ioutil.ReadAll(rdr)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func main() {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write(indexHtml)
+	})
 	http.HandleFunc("/search", SearchHandler)
-	http.Handle("/", http.FileServer(http.Dir("./static/pubweb/")))
 	http.HandleFunc("/upload", UploadHandler)
+	nrsc.Handle("/static/")
 	http.ListenAndServe(":8080", nil)
 }
 
