@@ -5,6 +5,8 @@ import (
 	"bytes"
 	"database/sql"
 	"encoding/json"
+	"flag"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -91,7 +93,7 @@ func NewArchive(r io.Reader) (*Archive, error) {
 	return &Archive{zr}, nil
 }
 
-var tweetJsonGlob = `data/js/tweets/????_??.js`
+const tweetJsonGlob = `data/js/tweets/????_??.js`
 
 // Tests if this is a valid tweet archive, as it looked downloaded from Twitter
 func (a *Archive) Valid() bool {
@@ -128,8 +130,10 @@ type DB struct {
 	conn *sql.DB
 }
 
-func newDb(config map[string]interface{}) (*DB, error) {
-	conn, err := sql.Open("postgres", config["db"].(string))
+func newDb(dbname, host string, port int) (*DB, error) {
+	connStr := fmt.Sprintf("dbname=%s host=%s port=%d sslmode=disable", dbname, host, port)
+	log.Println("connStr:", connStr)
+	conn, err := sql.Open("postgres", connStr)
 	if err != nil {
 		return nil, err
 	}
@@ -235,16 +239,21 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 				http.Error(w, err.Error(), 500)
 				return
 			}
-			break
 		}
 	}
 }
 
 var indexHtml []byte
 
+var dbname = flag.String("dbname", "tweetarchive", "database name")
+var host = flag.String("host", "localhost", "database host")
+var port = flag.Int("port", 5432, "database port")
+
 func init() {
+	flag.Parse()
+
 	var err error
-	db, err = newDb(map[string]interface{}{"db": "dbname=paul port=5433 sslmode=disable"})
+	db, err = newDb(*dbname, *host, *port)
 	if err != nil {
 		panic(err)
 	}
