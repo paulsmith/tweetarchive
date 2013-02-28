@@ -27,6 +27,10 @@ function TweetListCtrl($scope, $http, $location) {
 				$scope.error = "There was an error";
 			});
 	};
+
+	$scope.location = $location;
 }
 
-TweetListCtrl.$inject = ['$scope', '$http', '$location'];
+function UploadCtrl($scope, $location) {
+	$scope.location = $location;
+}
