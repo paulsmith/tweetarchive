@@ -85,12 +85,12 @@ func NewArchive(r io.Reader) (*Archive, error) {
 	if err != nil {
 		return nil, err
 	}
-	br := bytes.NewReader(b.Bytes())
-	zr, err := zip.NewReader(br, int64(br.Len()))
+	brdr := bytes.NewReader(b.Bytes())
+	zrdr, err := zip.NewReader(brdr, int64(brdr.Len()))
 	if err != nil {
 		return nil, err
 	}
-	return &Archive{zr}, nil
+	return &Archive{zrdr}, nil
 }
 
 const tweetJsonGlob = `data/js/tweets/????_??.js`
@@ -130,9 +130,8 @@ type DB struct {
 	conn *sql.DB
 }
 
-func newDb(dbname, host string, port int) (*DB, error) {
-	connStr := fmt.Sprintf("dbname=%s host=%s port=%d sslmode=disable", dbname, host, port)
-	log.Println("connStr:", connStr)
+func newDb(name, host string, port int) (*DB, error) {
+	connStr := fmt.Sprintf("dbname=%s host=%s port=%d sslmode=disable", name, host, port)
 	conn, err := sql.Open("postgres", connStr)
 	if err != nil {
 		return nil, err
@@ -246,14 +245,15 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 var indexHtml []byte
 
 var dbname = flag.String("dbname", "tweetarchive", "database name")
-var host = flag.String("host", "localhost", "database host")
-var port = flag.Int("port", 5432, "database port")
+var dbhost = flag.String("dbhost", "localhost", "database host")
+var dbport = flag.Int("dbport", 5432, "database port")
+var port = flag.Int("port", 8080, "web server port")
 
 func init() {
 	flag.Parse()
 
 	var err error
-	db, err = newDb(*dbname, *host, *port)
+	db, err = newDb(*dbname, *dbhost, *dbport)
 	if err != nil {
 		panic(err)
 	}
@@ -282,7 +282,7 @@ func main() {
 	http.HandleFunc("/search", SearchHandler)
 	http.HandleFunc("/upload", UploadHandler)
 	nrsc.Handle("/static/")
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(fmt.Sprintf(":%d", *port), nil)
 }
 
 const createSql = `
