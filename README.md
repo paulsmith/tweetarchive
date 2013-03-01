@@ -53,6 +53,12 @@ Summary of command line options
  * `-dbport=<port>`: database port, default 5432
  * `-port=<port>`: port of the web application, default 13331
 
+License
+-------
+
+This work is copyright 2013 Paul Smith and is licensed under the Apache License
+Version 2.0, see `LICENSE`.
+
 [1]: http://blog.twitter.com/2012/12/your-twitter-archive.html
 [win]: https://tweetarchivesearch.s3.amazonaws.com/downloads/tweetarchive.exe
 [lin]: https://tweetarchivesearch.s3.amazonaws.com/downloads/tweetarchive.linux
