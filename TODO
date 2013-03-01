@@ -1,8 +1,9 @@
 - Un-hard-code the table name
 - Let database schema be configurable ('public' by default)
-- Insert geography
+- Import geography during zipfile upload
 - Basic viz: d3 histogram
 - Basic viz: map of tweets with geo payloads
 - Sync tweets from the API
 - Allow upload multiple archives from different users
 - Allow zip archive to be re-uploaded (idempotence)
+- Add tests to the Go code
