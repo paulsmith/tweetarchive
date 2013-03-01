@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Tweet Archive Search by paulsmith</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Tweet Archive Search</h1>
+        <p>Full-text search for your Twitter archive</p>
+
+        <p class="view"><a href="https://github.com/paulsmith/tweetarchive">View the Project on GitHub <small>paulsmith/tweetarchive</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/paulsmith/tweetarchive/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/paulsmith/tweetarchive/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/paulsmith/tweetarchive">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Tweet archive search</h1>
+
+<p>Indexes <a href="http://blog.twitter.com/2012/12/your-twitter-archive.html">your Twitter archive</a> .zip file so you can search your tweets by
+keyword or phrase.</p>
+
+<h2>Requirements</h2>
+
+<ul>
+<li>Your Twitter archive .zip file, <a href="http://blog.twitter.com/2012/12/your-twitter-archive.html">download it from Twitter</a>
+</li>
+<li>PostgreSQL 8.3 or greater (for full-text search support)</li>
+</ul><h2>How to install</h2>
+
+<p>Just download the binary executable for your OS and execute it from the command
+line.</p>
+
+<ul>
+<li><a href="https://tweetarchivesearch.s3.amazonaws.com/downloads/tweetarchive.exe">Windows</a></li>
+<li><a href="https://tweetarchivesearch.s3.amazonaws.com/downloads/tweetarchive.linux">Linux</a></li>
+<li><a href="https://tweetarchivesearch.s3.amazonaws.com/downloads/tweetarchive.osx">Mac OS X</a></li>
+</ul><p><a href="http://tweetarchivesearch.s3.amazonaws.com/downloads/tweetarchive.checksum.txt">Signed checksums file</a></p>
+
+<h2>How to run</h2>
+
+<p>By default, assumes you have a local PostgreSQL instance running on port 5432.
+Create a database named "tweetarchive".</p>
+
+<pre><code>$ createdb -E UTF8 tweetarchive
+</code></pre>
+
+<p>Run the web app:</p>
+
+<pre><code>$ ./tweetarchive
+</code></pre>
+
+<h3>Index your Twitter archive</h3>
+
+<p>Go to <a href="http://127.0.0.1:13331/upload">/upload</a>,
+click on the file button, selected your downloaded Twitter archive .zip file,
+and click Upload. Your archive will be indexed for full-text search.</p>
+
+<h3>Search your tweets</h3>
+
+<p>Navigate to <a href="http://127.0.0.1:13331/">http://127.0.0.1:13331/</a> in your browser,
+type terms in to the box and hit enter to search your tweets!</p>
+
+<h2>Summary of command line options</h2>
+
+<ul>
+<li>
+<code>-dbname=&lt;name&gt;</code>: name of the PostgreSQL database to store your tweets, default "tweetarchive"</li>
+<li>
+<code>-dbhost=&lt;host&gt;</code>: database hostname, default "localhost"</li>
+<li>
+<code>-dbport=&lt;port&gt;</code>: database port, default 5432</li>
+<li>
+<code>-port=&lt;port&gt;</code>: port of the web application, default 13331</li>
+</ul><h2>License</h2>
+
+<p>This work is copyright 2013 Paul Smith and is licensed under the Apache License
+Version 2.0, see <code>LICENSE</code>.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/paulsmith">paulsmith</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-304677-19");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
