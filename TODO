@@ -1,0 +1,6 @@
+- Un-hard-code the table name
+- Let database schema be configurable ('public' by default)
+- Upload from the web app
+- Insert geography
+- Basic viz: d3 histogram
+- Basic viz: map
