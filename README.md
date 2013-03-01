@@ -20,6 +20,8 @@ line.
  * [Linux][lin]
  * [Mac OS X][osx]
 
+[Signed checksums file][chksum]
+
 How to run
 ----------
 
@@ -55,3 +57,4 @@ Summary of command line options
 [win]: https://tweetarchivesearch.s3.amazonaws.com/downloads/tweetarchive.exe
 [lin]: https://tweetarchivesearch.s3.amazonaws.com/downloads/tweetarchive.linux
 [osx]: https://tweetarchivesearch.s3.amazonaws.com/downloads/tweetarchive.osx
+[chksum]: http://tweetarchivesearch.s3.amazonaws.com/downloads/tweetarchive.checksum.txt
