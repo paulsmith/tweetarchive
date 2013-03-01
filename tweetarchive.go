@@ -11,6 +11,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
 	"strconv"
 	"time"
@@ -268,12 +269,14 @@ func init() {
 	var err error
 	db, err = newDb(*dbname, *dbhost, *dbport)
 	if err != nil {
-		panic(err)
+		fmt.Fprintln(os.Stderr, "couldn't connect to the database:", err)
+		os.Exit(1)
 	}
 	if !db.tableExists() {
 		log.Println("creating tweets table")
 		if err := db.createTable(); err != nil {
-			panic(err)
+			fmt.Fprintln(os.Stderr, "couldn't create the tweets table:", err)
+			os.Exit(1)
 		}
 	}
 
