@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-function TweetListCtrl($scope, $http, $location) {
+function TweetSearchCtrl($scope, $http, $location) {
 	$scope.$watch(function() { return $location.search(); }, function(newVal, oldVal, scope) {
 		var q = newVal.q;
 		if (q) {
@@ -28,9 +28,5 @@ function TweetListCtrl($scope, $http, $location) {
 			});
 	};
 
-	$scope.location = $location;
-}
-
-function UploadCtrl($scope, $location) {
 	$scope.location = $location;
 }

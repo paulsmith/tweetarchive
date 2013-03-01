@@ -1,6 +1,8 @@
 - Un-hard-code the table name
 - Let database schema be configurable ('public' by default)
-- Upload from the web app
 - Insert geography
 - Basic viz: d3 histogram
-- Basic viz: map
+- Basic viz: map of tweets with geo payloads
+- Sync tweets from the API
+- Allow upload multiple archives from different users
+- Allow zip archive to be re-uploaded (idempotence)

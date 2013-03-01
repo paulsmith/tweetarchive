@@ -1,7 +1,7 @@
 'use strict';
 
 describe("Tweet archive search controllers", function() {
-	describe("TweetListCtrl", function() {
+	describe("TweetSearchCtrl", function() {
 		var rootScope, scope, ctrl, $httpBackend, location;
 
 		beforeEach(inject(function(_$httpBackend_, $rootScope, $controller, $location) {
@@ -10,7 +10,7 @@ describe("Tweet archive search controllers", function() {
 				respond({tweets: [{text: "First"}, {text: "Hello, world"}]})
 			scope = $rootScope.$new();
 			rootScope = $rootScope;
-			ctrl = $controller(TweetListCtrl, {$scope: scope});
+			ctrl = $controller(TweetSearchCtrl, {$scope: scope});
 			location = $location;
 		}));
 

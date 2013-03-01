@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Upload Twitter archive</title>
+  <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css"/>
+</head>
+<body>
+	<div class="container">
+		<h1>Upload Twitter archive zip file</h1>
+
+		<form action="/upload" method="post" enctype="multipart/form-data">
+			<input type="file" name="zipfile">
+			<button type="submit" class="btn">Upload</button>
+		</form>
+	</div>
+</body>
+</html>

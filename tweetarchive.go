@@ -239,15 +239,28 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 		}
+		http.Redirect(w, r, "/", 302)
 	}
+	w.Write(uploadHtml)
 }
 
-var indexHtml []byte
+var indexHtml, uploadHtml []byte
 
 var dbname = flag.String("dbname", "tweetarchive", "database name")
 var dbhost = flag.String("dbhost", "localhost", "database host")
 var dbport = flag.Int("dbport", 5432, "database port")
-var port = flag.Int("port", 8080, "web server port")
+var port = flag.Int("port", 13331, "web server port")
+
+func loadTemplate(name string, tvar *[]byte) {
+	rdr, err := nrsc.Get(name).Open()
+	if err != nil {
+		panic(err)
+	}
+	*tvar, err = ioutil.ReadAll(rdr)
+	if err != nil {
+		panic(err)
+	}
+}
 
 func init() {
 	flag.Parse()
@@ -265,14 +278,8 @@ func init() {
 	}
 
 	nrsc.Initialize()
-	rdr, err := nrsc.Get("index.html").Open()
-	if err != nil {
-		panic(err)
-	}
-	indexHtml, err = ioutil.ReadAll(rdr)
-	if err != nil {
-		panic(err)
-	}
+	loadTemplate("index.html", &indexHtml)
+	loadTemplate("upload.html", &uploadHtml)
 }
 
 func main() {
