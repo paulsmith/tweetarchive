@@ -4,6 +4,14 @@ Tweet archive search
 Indexes [your Twitter archive][1] .zip file so you can search your tweets by
 keyword or phrase.
 
+![screenshot of upload page](https://raw.github.com/paulsmith/tweetarchive/gh-pages/images/ss4.png)
+
+![screenshot of search box](https://raw.github.com/paulsmith/tweetarchive/gh-pages/images/ss1.png)
+
+![screenshot of search results python](https://raw.github.com/paulsmith/tweetarchive/gh-pages/images/ss2.png)
+
+![screenshot of search results llvm](https://raw.github.com/paulsmith/tweetarchive/gh-pages/images/ss3.png)
+
 Requirements
 ------------
 
@@ -52,6 +60,13 @@ Summary of command line options
  * `-dbhost=<host>`: database hostname, default "localhost"
  * `-dbport=<port>`: database port, default 5432
  * `-port=<port>`: port of the web application, default 13331
+
+Contributing
+------------
+
+This app is written in Go for the server and uses AngularJS for the front-end.
+It has a bare-bones Bootstrap style. It needs a lot of help, check out the
+`TODO` file.
 
 License
 -------
